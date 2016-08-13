@@ -22,13 +22,18 @@ public class MedicoBean implements Serializable {
 	private EnderecoPorCep endCep;
 
 	public MedicoBean() {
-		medico = new Medico();
+		limpar();
 	}
 
 	public void adicionar() {
 		medicos.guardar(medico);
+		limpar();
 	}
 
+	public void limpar(){
+		medico = new Medico();
+		System.out.println("novo medico");
+	}
 	// Preenche o atributo endereco do objeto medico com o objeto endereco
 	// retornado do metodo obterEndereco()
 	public void fillAddress() {
