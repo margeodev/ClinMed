@@ -11,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.sistema.enums.Sexo;
 
@@ -36,18 +39,25 @@ public class Paciente {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	@NotBlank
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	@NotBlank
 	public String getCpf() {
 		return cpf;
 	}
+		
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
+	@NotBlank
 	public String getTelefone1() {
 		return telefone1;
 	}
@@ -60,6 +70,8 @@ public class Paciente {
 	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
 	}
+	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	public Sexo getSexo() {
 		return sexo;
@@ -77,6 +89,7 @@ public class Paciente {
 		this.endereco = endereco;
 	}
 
+	@NotNull
 	@Column(name="data_nascimento")
 	public Date getDataNascimento() {
 		return dataNascimento;

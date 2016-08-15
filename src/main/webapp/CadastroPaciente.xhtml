@@ -9,101 +9,115 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Cadastrar Paciente</title>
 	<h:outputScript library="js" name="general.js" />
+	<h:outputStylesheet name="sistema.css" library="css"/>
 </h:head>
 <h:body>
-
 	<h:form id="frm">
-		<p:panel id="panel" header="Dados pessoais" style="margin-bottom:10px">
-			<h:panelGrid columns="3" cellpadding="5">
-				<p:outputLabel for="nome" value="Nome" />
-				<p:inputText id="nome" required="true" label="Nome" value="#{pb.paciente.nome}"
-					size="40" onchange="this.value = removeAcentos(this.value)">
-					<f:validateLength minimum="2"/>
-				</p:inputText>
-				<p:message for="nome" />
+		<p:messages autoUpdate="true" closable="true" />
+		<p>Cadastro de Paciente</p>
+		<p:tabView>			
+			<p:tab title="Dados Pessoais">
+				<p:panel id="panel" style="margin-bottom:10px">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel for="nome" value="Nome" />
+						<p:inputText id="nome" label="Nome" value="#{pb.paciente.nome}"
+							size="40" onchange="this.value = removeAcentos(this.value)" />
 
-				<p:outputLabel for="cpf" value="CPF" />
-				<p:inputText id="cpf" label="CPF" value="#{pb.paciente.cpf}"/>
-				<p:message for="cpf" />
 
-				<p:outputLabel for="tel" value="Telefone 1" />
-				<p:inputMask mask="(99) 99999-9999" label="tel" id="tel" value="#{pb.paciente.telefone1}"/>
-				<p:message for="tel" />
+						<p:outputLabel for="cpf" value="CPF" />
+						<p:inputMask mask="999.999.999-99" id="cpf" label="CPF"
+							value="#{pb.paciente.cpf}"
+							onchange="this.value = validaCpf(this.value)" />
 
-				<p:outputLabel for="tel2" value="Telefone 2" />
-				<p:inputMask mask="(99) 99999-9999" label="tel" id="tel2" value="#{pb.paciente.telefone2}"/>
-				<p:message for="tel2" />
-				
-				<p:outputLabel  value="Sexo" for="sexo"/>
-				<p:selectOneRadio id="sexo" value="#{pb.paciente.sexo}">
-					<f:selectItem itemLabel="Masculino" itemValue="MASCULINO" style="padding-right: 10px"/>
-					<f:selectItem itemLabel="Feminino" itemValue="FEMININO" />
-				</p:selectOneRadio>
+
+						<p:outputLabel for="tel" value="Telefone 1" />
+						<p:inputMask mask="(99) 99999-9999" label="tel" id="tel"
+							value="#{pb.paciente.telefone1}" />
+
+
+						<p:outputLabel for="tel2" value="Telefone 2" />
+						<p:inputMask mask="(99) 99999-9999" label="tel" id="tel2"
+							value="#{pb.paciente.telefone2}" />
+
+
+						<p:outputLabel value="Sexo" for="sexo" />
+						<p:selectOneRadio id="sexo" value="#{pb.paciente.sexo}">
+							<f:selectItem itemLabel="Masculino" itemValue="MASCULINO"
+								style="padding-right: 10px" />
+							<f:selectItem itemLabel="Feminino" itemValue="FEMININO" />
+						</p:selectOneRadio>
+
+
+						<p:outputLabel value="Data de nascimento" for="dataNascimento" />
+						<p:calendar id="dataNascimento"
+							value="#{pb.paciente.dataNascimento}" pattern="dd/MM/yyyy"
+							readonlyInput="true" navigator="true" maxdate="#{pb.dataHoje}"
+							locale="pt_BR" />
+
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+
+			<p:tab title="Endereço">
+				<p:panel id="panel_endereco" style="margin-bottom:10px">
+					<h:panelGrid columns="3" cellpadding="5">
+						<p:outputLabel for="cep" value="CEP" />
+						<h:panelGroup>
+							<p:inputMask mask="99999-999" id="cep" size="20" maxlength="10"
+								style="margin-left: 10px" value="#{pb.paciente.endereco.cep}">							
+								<p:ajax listener="#{pb.fillAddress}" process="@this"
+									partialSubmit="true" event="change" update="panel_endereco"/>								
+							</p:inputMask>							
+						</h:panelGroup>
+						<p:spacer />
+
+						<p:outputLabel for="rua" value="Rua" />
+						<h:panelGroup>
+							<p:inputText id="rua" size="40" label="Rua"
+								style="margin-left: 10px"	value="#{pb.paciente.endereco.logradouro}" />
+							<p:outputLabel for="num" value="Nº" style="margin-left:20px" />
+							<p:inputText id="num" label="numero" size="7"
+								style="margin-left: 10px" value="#{pb.paciente.endereco.numero}" />
+						</h:panelGroup>
+						<p:spacer />
+
+
+						<p:outputLabel for="bairro" value="Bairro" />
+						<p:inputText id="bairro" label="Bairro" style="margin-left:10px"
+							value="#{pb.paciente.endereco.bairro}" />
+						<p:spacer />
+
+						<p:outputLabel for="cidade" value="Cidade" />
+						<h:panelGroup>
+							<p:inputText id="cidade" label="Cidade" style="margin-left: 10px"
+								value="#{pb.paciente.endereco.cidade}" />
+							<p:outputLabel for="estado" value="Estado"
+								style="margin-left:20px" />
+							<p:inputText id="estado" size="10" label="estado"
+								value="#{pb.paciente.endereco.estado}" style="margin-left: 10px" />
+						</h:panelGroup>
+						<p:spacer />
+
+						<p:outputLabel for="comp" value="Complemento" />
+						<p:inputText id="comp" label="comp" size="40"
+							value="#{pb.paciente.endereco.complemento}"
+							style="margin-left: 10px" />
+						<p:spacer/>
+					</h:panelGrid>					
+				</p:panel>
 				<p:spacer/>
-				
-				<p:outputLabel  value="Data de nascimento" for="dataNascimento"/>
-				<p:calendar id="dataNascimento" value="#{pb.paciente.dataNascimento}"
-					pattern="dd/MM/yyyy" readonlyInput="true" navigator="true"
-					maxdate="#{pb.dataHoje}" locale="pt_BR"/>
-				<p:spacer/>
-			</h:panelGrid>
-		</p:panel>
+			</p:tab>
+		</p:tabView>
 
-
-
-		<p:panel id="panel_endereco" header="Endereço"
-			style="margin-bottom:10px;">
-			<h:panelGrid columns="3" cellpadding="5">
-				<p:outputLabel for="cep" value="CEP"/>
-				<h:panelGroup>
-					<p:inputMask mask="99999-999" id="cep" size="20" maxlength="10"
-						style="margin-left: 10px" value="#{pb.paciente.endereco.cep}"/>
-					<p:commandButton update="panel_endereco" process="@this"
-						value="Buscar" ajax="false" style="margin-left: 10px" actionListener="#{pb.fillAddress}"/>
-				</h:panelGroup>
-				<p:spacer />
-
-				<p:outputLabel for="rua" value="Rua" />
-				<h:panelGroup>
-					<p:inputText id="rua" size="40" label="Rua"
-						style="margin-left: 10px" value="#{pb.paciente.endereco.logradouro}"/>
-					<p:outputLabel for="num" value="Nº" style="margin-left:20px" />
-					<p:inputText id="num" label="numero" size="7"
-						style="margin-left: 10px" value="#{pb.paciente.endereco.numero}"/>
-				</h:panelGroup>
-				<p:spacer />
-
-
-				<p:outputLabel for="bairro" value="Bairro" />
-				<h:panelGroup>
-					<p:inputText id="bairro" label="Bairro" style="margin-left:10px" 
-						value="#{pb.paciente.endereco.bairro}"/>
-					<p:outputLabel for="comp" value="Complemento" style="margin-left:20px"/>
-					<p:inputText id="comp" label="comp" size="40" value="#{pb.paciente.endereco.complemento}"
-						style="margin-left: 10px" />
-				</h:panelGroup>
-				<p:spacer />
-
-				<p:outputLabel for="cidade" value="Cidade" />
-				<h:panelGroup>
-					<p:inputText id="cidade" label="Cidade" style="margin-left: 10px" 
-						value="#{pb.paciente.endereco.cidade}"/>
-					<p:outputLabel for="estado" value="Estado" style="margin-left:20px" />
-					<p:inputText id="estado" size="10" label="estado" value="#{pb.paciente.endereco.estado}"
-						style="margin-left: 10px" />
-				</h:panelGroup>
-				<p:spacer />				
-			</h:panelGrid>
-		</p:panel>
 
 		<p:toolbar>
-		<f:facet name="left">
-			<p:commandButton value="Cadastrar" style="margin-right:20px;" actionListener="#{pb.adicionar}"
-			update="frm"/>
-		</f:facet>
-	</p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Cadastrar" style="margin-right:20px;"
+					action="#{pb.adicionar}" update="frm" />
+			</f:facet>
+		</p:toolbar>
 	</h:form>
-	
+
 </h:body>
 
 </html>
