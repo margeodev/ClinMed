@@ -9,6 +9,7 @@ import javax.inject.Named;
 import com.sistema.modelo.Medico;
 import com.sistema.repository.EnderecoPorCep;
 import com.sistema.repository.Medicos;
+import com.sistema.util.jsf.FacesUtil;
 
 @Named("mb")
 @RequestScoped
@@ -27,6 +28,7 @@ public class MedicoBean implements Serializable {
 
 	public void adicionar() {
 		medicos.guardar(medico);
+		FacesUtil.addSuccessMessage("Médico adicionado com sucesso.");
 		limpar();
 	}
 

@@ -10,6 +10,7 @@ import javax.inject.Named;
 import com.sistema.modelo.Paciente;
 import com.sistema.repository.EnderecoPorCep;
 import com.sistema.repository.Pacientes;
+import com.sistema.util.jsf.FacesUtil;
 
 @Named("pb")
 @RequestScoped
@@ -32,6 +33,7 @@ public class PacienteBean implements Serializable {
 	
 	public void adicionar() {
 		pacientes.guardar(paciente);
+		FacesUtil.addSuccessMessage("Paciente adicionado com sucesso.");
 		limpar();
 		
 	}
