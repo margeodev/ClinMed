@@ -18,25 +18,19 @@
 		<p>Cadastro de Médico</p>
 		<p:tabView>
 			<p:tab title="Dados Pessoais">
-				<p:panel id="panel" header="Dados pessoais"
+				<p:panel id="panel"
 					style="margin-bottom:10px">
-					<h:panelGrid columns="3" cellpadding="5">
+					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel for="nome" value="Nome" />
-						<p:inputText id="nome" required="true" label="Nome"
-							value="#{mb.medico.nome}"
-							onchange="this.value = removeAcentos(this.value)">
-							<f:validateLength minimum="2" />
-						</p:inputText>
-						<p:message for="nome" />
-
+						<p:inputText id="nome" label="Nome"
+							value="#{mb.medico.nome}"/>
+							
 						<p:outputLabel for="crm" value="CRM" />
 						<p:inputText id="crm" label="CRM" value="#{mb.medico.crm}" />
-						<p:message for="crm" />
 
 						<p:outputLabel for="tel" value="Telefone 1" />
 						<p:inputMask mask="(99) 99999-9999" label="tel" id="tel"
 							value="#{mb.medico.telefone1}" />
-						<p:message for="tel" />
 
 						<p:outputLabel for="tel2" value="Telefone 2" />
 						<p:inputMask mask="(99) 99999-9999" label="tel" id="tel2"
@@ -46,7 +40,7 @@
 			</p:tab>
 
 			<p:tab title="Endereço">
-				<p:panel id="panel_endereco" header="Endereço"
+				<p:panel id="panel_endereco"
 					style="margin-bottom:10px;">
 					<h:panelGrid columns="3" cellpadding="5">
 						<p:outputLabel for="cep" value="CEP" />
@@ -95,14 +89,19 @@
 					</h:panelGrid>
 				</p:panel>
 			</p:tab>
-		</p:tabView>
-		
+		</p:tabView>		
 		
 		<p:toolbar>
 			<f:facet name="left">
-				<p:commandButton value="Cadastrar" style="margin-right:20px;"
-					actionListener="#{mb.adicionar}" update="frm" />
+				<p:commandButton value="Cadastrar" style="margin-left:20px"
+					actionListener="#{mb.adicionar}" update="frm" icon="ui-icon-disk"/>
 			</f:facet>
+			<f:facet name="right">
+				<p:button value="Procurar" style="margin-right:20px" 
+				outcome="/medico/PesquisarMedicos.xhtml" icon="ui-icon-search"/>
+			</f:facet>
+			
+			
 		</p:toolbar>
 	</h:form>
 

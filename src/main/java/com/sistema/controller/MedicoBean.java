@@ -2,10 +2,12 @@ package com.sistema.controller;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.sistema.modelo.Endereco;
 import com.sistema.modelo.Medico;
 import com.sistema.repository.EnderecoPorCep;
 import com.sistema.repository.Medicos;
@@ -22,7 +24,8 @@ public class MedicoBean implements Serializable {
 	@Inject
 	private EnderecoPorCep endCep;
 
-	public MedicoBean() {
+	@PostConstruct
+	public void init() {
 		limpar();
 	}
 
@@ -34,6 +37,7 @@ public class MedicoBean implements Serializable {
 
 	public void limpar(){
 		medico = new Medico();
+		medico.setEndereco(new Endereco());
 		System.out.println("novo medico");
 	}
 	// Preenche o atributo endereco do objeto medico com o objeto endereco

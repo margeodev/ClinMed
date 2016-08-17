@@ -1,6 +1,7 @@
 package com.sistema.repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -22,6 +23,11 @@ public class Medicos implements Serializable {
 		trx.commit();
 		System.out.println("Medico adicionado.");
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Medico> buscarTodos(){
+		return em.createQuery("from Medico").getResultList();
 	}
 	
 }

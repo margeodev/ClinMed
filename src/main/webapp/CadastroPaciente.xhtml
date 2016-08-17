@@ -20,25 +20,20 @@
 				<p:panel id="panel" style="margin-bottom:10px">
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel for="nome" value="Nome" />
-						<p:inputText id="nome" label="Nome" value="#{pb.paciente.nome}"
-							size="40" onchange="this.value = removeAcentos(this.value)" />
-
+						<p:inputText id="nome" label="Nome" value="#{pb.paciente.nome}" size="40"/>
 
 						<p:outputLabel for="cpf" value="CPF" />
 						<p:inputMask mask="999.999.999-99" id="cpf" label="CPF"
 							value="#{pb.paciente.cpf}"
 							onchange="this.value = validaCpf(this.value)" />
 
-
 						<p:outputLabel for="tel" value="Telefone 1" />
 						<p:inputMask mask="(99) 99999-9999" label="tel" id="tel"
 							value="#{pb.paciente.telefone1}" />
 
-
 						<p:outputLabel for="tel2" value="Telefone 2" />
 						<p:inputMask mask="(99) 99999-9999" label="tel" id="tel2"
 							value="#{pb.paciente.telefone2}" />
-
 
 						<p:outputLabel value="Sexo" for="sexo" />
 						<p:selectOneRadio id="sexo" value="#{pb.paciente.sexo}">
@@ -46,7 +41,6 @@
 								style="padding-right: 10px" />
 							<f:selectItem itemLabel="Feminino" itemValue="FEMININO" />
 						</p:selectOneRadio>
-
 
 						<p:outputLabel value="Data de nascimento" for="dataNascimento" />
 						<p:calendar id="dataNascimento"
@@ -81,7 +75,6 @@
 						</h:panelGroup>
 						<p:spacer />
 
-
 						<p:outputLabel for="bairro" value="Bairro" />
 						<p:inputText id="bairro" label="Bairro" style="margin-left:10px"
 							value="#{pb.paciente.endereco.bairro}" />
@@ -109,11 +102,10 @@
 			</p:tab>
 		</p:tabView>
 
-
 		<p:toolbar>
 			<f:facet name="left">
 				<p:commandButton value="Cadastrar" style="margin-right:20px;"
-					action="#{pb.adicionar}" update="frm" />
+					action="#{pb.adicionar}" update="frm" icon="ui-icon-check"/>
 			</f:facet>
 		</p:toolbar>
 	</h:form>

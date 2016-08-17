@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Pesquisar médicos</title>
+	<h:outputScript library="js" name="general.js" />
+	<h:outputStylesheet name="sistema.css" library="css" />
+</h:head>
+<h:body>
+	<p>Pesquisar Médico</p>
+	<p:toolbar>
+		<p:toolbarGroup style="margin-left: 20px">
+			<p:commandButton value="Pesquisar" style="margin-right:20px"
+				icon="ui-icon-search" />
+		</p:toolbarGroup>
+
+		<p:toolbarGroup align="right">
+			<p:button value="Novo" style="margin-right:20px"
+				outcome="/medico/CadastroMedico.xhtml" />
+		</p:toolbarGroup>
+	</p:toolbar>
+
+	<p:panel id="panel" style="margin-bottom:10px">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel for="nome" value="Nome" />
+			<p:inputText id="nome" label="Nome" value="#{pmb.medico.nome}"
+				size="40" />
+
+			<p:outputLabel for="crm" value="CRM" />
+			<p:inputText id="crm" label="crm" value="#{pmb.medico.crm}" />
+		</h:panelGrid>
+	</p:panel>
+
+	<p:panel header="Médicos cadastrados">
+		<p:dataTable id="medicosTable" value="#{pmb.medicos}" var="medico"
+			style="marging-top: 20px" emptyMessage="Nenhum médico encontrado"
+			rows="20" paginator="true" paginatorAlwaysVisible="false"
+			paginatorPosition="bottom">
+
+			<p:column headerText="CRM" style="text-align: center; width: 180px">
+				<h:outputText value="#{medico.crm}" />
+			</p:column>
+
+			<p:column headerText="Nome" >
+				<h:outputText value="#{medico.nome}"/>
+			</p:column>
+
+		</p:dataTable>
+
+	</p:panel>
+
+</h:body>
+
+</html>
