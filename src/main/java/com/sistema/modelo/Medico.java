@@ -1,11 +1,16 @@
 package com.sistema.modelo;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
@@ -16,6 +21,7 @@ public class Medico {
 	private String telefone1;
 	private String telefone2;
 	private Endereco endereco;
+	private List<Especialidade> especialidades;
 	
 	@Id @GeneratedValue
 	public int getId() {
@@ -24,12 +30,16 @@ public class Medico {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	@NotEmpty
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	@NotEmpty
 	public String getCrm() {
 		return crm;
 	}
@@ -37,6 +47,7 @@ public class Medico {
 		this.crm = crm;
 	}
 		
+	@NotEmpty
 	public String getTelefone1() {
 		return telefone1;
 	}
@@ -49,6 +60,7 @@ public class Medico {
 	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
 	}
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_endereco")
 	public Endereco getEndereco() {
@@ -56,7 +68,16 @@ public class Medico {
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}		
+	
+	@ManyToMany
+	public List<Especialidade> getEspecialidade() {
+		return especialidades;
 	}
+	public void setEspecialidade(List<Especialidade> especialidade) {
+		this.especialidades = especialidade;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

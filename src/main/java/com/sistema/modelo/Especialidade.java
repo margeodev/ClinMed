@@ -27,6 +27,7 @@ public class Especialidade implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,6 +48,5 @@ public class Especialidade implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 }

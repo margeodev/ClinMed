@@ -95,4 +95,4 @@ PrimeFaces.locales['pt_BR'] = {
         week: 'Semana',
         day: 'Dia',
         allDayText : 'Todo Dia'
-    };
+};

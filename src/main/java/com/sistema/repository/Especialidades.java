@@ -18,4 +18,10 @@ public class Especialidades implements Serializable {
 	public List<Especialidade> especialidades(){
 		return em.createQuery("from Especialidade", Especialidade.class).getResultList();
 	}
+
+	public Especialidade porId(int id) {
+		return em.find(Especialidade.class, id);
+	}
+
+	
 }

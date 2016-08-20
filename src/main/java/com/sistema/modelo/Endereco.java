@@ -3,9 +3,9 @@ package com.sistema.modelo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 public class Endereco {
@@ -26,7 +26,6 @@ public class Endereco {
 		this.id = id;
 	}
 	
-	@NotBlank
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -34,7 +33,6 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 	
-	@NotBlank
 	public String getBairro() {
 		return bairro;
 	}
@@ -42,23 +40,21 @@ public class Endereco {
 		this.bairro = bairro;
 	}
 	
-	@NotBlank
 	public String getCidade() {
 		return cidade;
 	}
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
-	}
+	}	
 	
-	@NotBlank
+	@NotEmpty
 	public String getCep() {
 		return cep;
 	}
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
-	@NotBlank
+		
 	public String getEstado() {
 		return estado;
 	}

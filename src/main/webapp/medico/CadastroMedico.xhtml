@@ -11,10 +11,10 @@
 	<h:outputScript library="js" name="general.js" />
 	<h:outputStylesheet name="sistema.css" library="css"/>
 </h:head>
-<h:body>
 
-	<h:form id="frm">
-		<p:messages autoUpdate="true" closable="true" />
+<h:body>
+	<p:messages autoUpdate="true" closable="true" />
+	<h:form id="frm">		
 		<p>Cadastro de Médico</p>
 		<p:tabView>
 			<p:tab title="Dados Pessoais">
@@ -23,10 +23,10 @@
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:outputLabel for="nome" value="Nome" />
 						<p:inputText id="nome" label="Nome"
-							value="#{mb.medico.nome}"/>
+							value="#{mb.medico.nome}" onchange="this.value = removeAcentos(this.value)"/>
 							
 						<p:outputLabel for="crm" value="CRM" />
-						<p:inputText id="crm" label="CRM" value="#{mb.medico.crm}" />
+						<p:inputText id="crm" label="CRM" value="#{mb.medico.crm}"/>
 
 						<p:outputLabel for="tel" value="Telefone 1" />
 						<p:inputMask mask="(99) 99999-9999" label="tel" id="tel"
@@ -36,7 +36,7 @@
 						<p:inputMask mask="(99) 99999-9999" label="tel" id="tel2"
 							value="#{mb.medico.telefone2}" />
 					</h:panelGrid>
-				</p:panel>
+				</p:panel>				
 			</p:tab>
 
 			<p:tab title="Endereço">
@@ -46,10 +46,9 @@
 						<p:outputLabel for="cep" value="CEP" />
 						<h:panelGroup>
 							<p:inputMask mask="99999-999" id="cep" size="20" maxlength="10"
-								style="margin-left: 10px" value="#{mb.medico.endereco.cep}">
-								<p:ajax listener="#{mb.fillAddress}" process="@this"
-									partialSubmit="true" event="change" update="panel_endereco" />
-							</p:inputMask>
+								style="margin-left: 10px" value="#{mb.medico.endereco.cep}"/>						
+							<p:commandButton value="Buscar" process="@this"
+								actionListener="#{mb.fillAddress}" ajax="false" style="margin-left: 10px"/>							
 						</h:panelGroup>
 						<p:spacer />
 
@@ -87,6 +86,16 @@
 								value="#{mb.medico.endereco.complemento}"
 								style="margin-left: 10px" />						
 					</h:panelGrid>
+				</p:panel>				
+			</p:tab>
+			
+			<p:tab title="Especialidades">
+				<p:panel>
+					<p:selectManyCheckbox value="#{mb.medico.especialidade}" converter="espCat" 
+						columns="4" layout="responsive">
+						<f:selectItems value="#{mb.especialidades}" var="esp" itemLabel="#{esp.descricao}"
+							itemValue="#{esp}"/>
+					</p:selectManyCheckbox>
 				</p:panel>
 			</p:tab>
 		</p:tabView>		
