@@ -38,6 +38,4 @@ public class EnderecoPorCep implements Serializable{
 		return endereco;
 	}
 	
-	
-
 }

@@ -18,6 +18,8 @@ import com.sistema.modelo.Medico;
 import com.sistema.repository.EnderecoPorCep;
 import com.sistema.repository.Especialidades;
 import com.sistema.repository.Medicos;
+import com.sistema.service.MedServ;
+import com.sistema.service.NegocioException;
 import com.sistema.util.jsf.FacesUtil;
 
 @Named("mb")
@@ -27,7 +29,7 @@ public class MedicoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Medico medico;
 	@Inject
-	private Medicos medicos;
+	private MedServ medServ;
 	@Inject
 	private EnderecoPorCep endCep;
 	private List<Especialidade> especialidades = new ArrayList<Especialidade>();
@@ -40,8 +42,13 @@ public class MedicoBean implements Serializable {
 	}	
 	
 	public void adicionar() {
-		medicos.guardar(medico);
-		FacesUtil.addSuccessMessage("Médico adicionado com sucesso.");
+		try {
+			medServ.salvar(medico);
+			FacesUtil.addSuccessMessage("Médico adicionado com sucesso.");
+		} catch (NegocioException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+		}
+		
 		limpar();
 	}
 
