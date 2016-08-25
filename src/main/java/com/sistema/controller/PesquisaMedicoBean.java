@@ -29,6 +29,7 @@ public class PesquisaMedicoBean implements Serializable {
 	
 	public void pesquisar(){		
 		medicos = medicosRep.filtrar(medFilter);
+		System.out.println("Total de médicos: " + medicos.size());
 	}
 
 	public List<Medico> getMedicos() {

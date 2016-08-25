@@ -6,9 +6,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,7 +14,6 @@ import com.sistema.modelo.Especialidade;
 import com.sistema.modelo.Medico;
 import com.sistema.repository.EnderecoPorCep;
 import com.sistema.repository.Especialidades;
-import com.sistema.repository.Medicos;
 import com.sistema.service.MedServ;
 import com.sistema.service.NegocioException;
 import com.sistema.util.jsf.FacesUtil;
@@ -47,8 +43,7 @@ public class MedicoBean implements Serializable {
 			FacesUtil.addSuccessMessage("Médico adicionado com sucesso.");
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
-		}
-		
+		}		
 		limpar();
 	}
 
@@ -56,7 +51,6 @@ public class MedicoBean implements Serializable {
 		medico = new Medico();		
 		medico.setEndereco(new Endereco());
 		especialidades = espRep.especialidades();
-		System.out.println("novo medico");
 	}
 		
 	public void fillAddress() {

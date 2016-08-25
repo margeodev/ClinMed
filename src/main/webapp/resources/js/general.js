@@ -17,9 +17,12 @@ function removeAcentos(newStringComAcento) {
 		var expressaoRegular = mapaAcentosHex[letra];
 		string = string.replace(expressaoRegular, letra);
 	}
-	return string;
+	return upper(string);
 }
 
+function upper(str){
+	return str.toUpperCase();
+}
 
 function validaCpf(cpf){
 	strCPF = cpf.replace(/[^\d]+/g,'');

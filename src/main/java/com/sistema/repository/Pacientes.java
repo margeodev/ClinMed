@@ -1,12 +1,21 @@
 package com.sistema.repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import com.sistema.modelo.Paciente;
+import com.sistema.repository.filter.PacienteFilter;
 
 public class Pacientes implements Serializable {
 	
@@ -15,13 +24,32 @@ public class Pacientes implements Serializable {
 	@Inject 
 	private EntityManager em;
 	
-	public void guardar(Paciente paciente) {
-		EntityTransaction trx = em.getTransaction();
-		trx.begin();		
-		paciente = em.merge(paciente);		
-		trx.commit();
-		System.out.println("Paciente adicionado.");
+	public void guardar(Paciente paciente) {		
+		em.merge(paciente);		
+	}
+	
+	public Paciente porCPF(String cpf){
+		try {
+			return em.createQuery("from Paciente where cpf = :cpf", Paciente.class)
+					.setParameter("cpf", cpf).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}		
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Paciente> filtrar(PacienteFilter pacFilter) {
+		Session session = em.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(Paciente.class);
 		
+		if (StringUtils.isNotBlank(pacFilter.getCpf())){
+			criteria.add(Restrictions.like("cpf", pacFilter.getCpf(), MatchMode.ANYWHERE));
+		}
+		
+		if (StringUtils.isNotBlank(pacFilter.getNome())){
+			criteria.add(Restrictions.ilike("nome", pacFilter.getNome(), MatchMode.ANYWHERE));
+		}
+		return criteria.addOrder(Order.asc("nome")).list();
 	}
 	
 }

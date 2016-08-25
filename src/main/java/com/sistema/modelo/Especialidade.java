@@ -1,10 +1,12 @@
 package com.sistema.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Especialidade implements Serializable{
@@ -26,7 +28,7 @@ public class Especialidade implements Serializable{
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
+	}	
 	
 	@Override
 	public int hashCode() {

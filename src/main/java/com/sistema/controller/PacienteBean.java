@@ -9,7 +9,8 @@ import javax.inject.Named;
 
 import com.sistema.modelo.Paciente;
 import com.sistema.repository.EnderecoPorCep;
-import com.sistema.repository.Pacientes;
+import com.sistema.service.NegocioException;
+import com.sistema.service.PacServ;
 import com.sistema.util.jsf.FacesUtil;
 
 @Named("pb")
@@ -17,9 +18,10 @@ import com.sistema.util.jsf.FacesUtil;
 public class PacienteBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private Paciente paciente;
 	@Inject
-	private Pacientes pacientes;
+	private PacServ pacServ;
 	@Inject
 	private EnderecoPorCep endCep;
 
@@ -32,18 +34,19 @@ public class PacienteBean implements Serializable {
 	}
 	
 	public void adicionar() {
-		pacientes.guardar(paciente);
-		FacesUtil.addSuccessMessage("Paciente adicionado com sucesso.");
-		limpar();
-		
+		try {
+			pacServ.salvar(paciente);
+			FacesUtil.addSuccessMessage("Paciente adicionado com sucesso.");
+			limpar();
+		} catch (NegocioException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+		}		
 	}
 	
 	public Date getDataHoje(){
 		return new Date(); 
 	}
-
-	// Preenche o atributo endereco do objeto medico com o objeto endereco
-	// retornado do metodo obterEndereco()
+	
 	public void fillAddress() {
 		paciente.setEndereco(endCep.obterEndereco(paciente.getEndereco().getCep()));
 	}

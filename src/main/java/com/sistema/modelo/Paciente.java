@@ -1,5 +1,6 @@
 package com.sistema.modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,10 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.sistema.enums.Sexo;
 
 @Entity
-public class Paciente {
+public class Paciente implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String nome;
 	private String cpf;
@@ -41,6 +45,7 @@ public class Paciente {
 	}
 	
 	@NotBlank
+	@Column(length=60, nullable=false)
 	public String getNome() {
 		return nome;
 	}
@@ -49,6 +54,7 @@ public class Paciente {
 	}
 	
 	@NotBlank
+	@Column(length=15, nullable=false, unique=true)
 	public String getCpf() {
 		return cpf;
 	}
@@ -58,12 +64,15 @@ public class Paciente {
 	}
 	
 	@NotBlank
+	@Column(length=15, nullable=false)
 	public String getTelefone1() {
 		return telefone1;
 	}
 	public void setTelefone1(String telefone1) {
 		this.telefone1 = telefone1;
 	}
+	
+	@Column(length=15)	
 	public String getTelefone2() {
 		return telefone2;
 	}
@@ -85,6 +94,7 @@ public class Paciente {
 	public Endereco getEndereco() {
 		return endereco;
 	}
+	
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
@@ -98,6 +108,27 @@ public class Paciente {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Paciente other = (Paciente) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}	
 	
 }

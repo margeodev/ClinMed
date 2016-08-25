@@ -6,14 +6,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-
-import com.sistema.modelo.Especialidade;
 import com.sistema.modelo.Medico;
 import com.sistema.repository.filter.MedicoFilter;
 
@@ -27,11 +26,6 @@ public class Medicos implements Serializable {
 	public void guardar(Medico medico) {
 		em.merge(medico);			
 	}
-	
-//	@SuppressWarnings("unchecked")
-//	public List<Medico> buscarTodos(){
-//		return em.createQuery("from Medico").getResultList();
-//	}	
 
 	public Medico porCRM(String crm) {
 		try {
@@ -45,7 +39,7 @@ public class Medicos implements Serializable {
 	@SuppressWarnings("unchecked")
 	public List<Medico> filtrar(MedicoFilter filtro){
 		Session session = em.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Medico.class).createAlias("especialidade", "e");
+		Criteria criteria = session.createCriteria(Medico.class);
 		
 		if (StringUtils.isNotBlank(filtro.getCrm())){
 			criteria.add(Restrictions.eq("crm", filtro.getCrm()));
@@ -54,6 +48,7 @@ public class Medicos implements Serializable {
 			criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
 		}
 		if (StringUtils.isNotBlank(filtro.getEspecialidade())){
+			criteria.createAlias("especialidade", "e");
 			criteria.add(Restrictions.ilike("e.descricao", filtro.getEspecialidade(), MatchMode.ANYWHERE));
 		}
 		return criteria.addOrder(Order.asc("nome")).list();

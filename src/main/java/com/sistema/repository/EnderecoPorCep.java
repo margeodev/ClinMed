@@ -18,6 +18,7 @@ public class EnderecoPorCep implements Serializable{
 	public Endereco obterEndereco(String cep){
 		String sql = "SELECT * FROM cep_pb where cep=:cep";
 		Query query = em.createNativeQuery(sql).setParameter("cep", cep);
+		@SuppressWarnings("unchecked")
 		List<Object[]> list = query.getResultList();
 		Endereco endereco = new Endereco();
 		if (list.size()>0){
@@ -27,11 +28,11 @@ public class EnderecoPorCep implements Serializable{
 			String bairro = (String) obj[3];
 			String _cep = (String) obj[4];
 			String estado = (String) obj[6];
-			endereco.setCidade(cidade);
-			endereco.setLogradouro(logradouro);
-			endereco.setBairro(bairro);
+			endereco.setCidade(cidade.toUpperCase());
+			endereco.setLogradouro(logradouro.toUpperCase());
+			endereco.setBairro(bairro.toUpperCase());
 			endereco.setCep(_cep);
-			endereco.setEstado(estado);
+			endereco.setEstado(estado.toUpperCase());
 		} else {
 			endereco.setCep(cep);
 		}		

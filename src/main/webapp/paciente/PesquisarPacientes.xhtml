@@ -7,55 +7,53 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Pesquisar médicos</title>
+	<title>Pesquisar paciente</title>
 	<h:outputScript library="js" name="general.js" />
 	<h:outputStylesheet name="sistema.css" library="css" />
 </h:head>
 <h:body>
-	<p>Pesquisar Médico</p>
+	<p>Pesquisar Paciente</p>
 	<h:form id="frm">
 		<p:toolbar>
 			<p:toolbarGroup style="margin-left: 20px">
 				<p:commandButton value="Pesquisar" style="margin-right:20px"
-					icon="ui-icon-search" action="#{pmb.pesquisar}" update="frm" />
+					icon="ui-icon-search" action="#{ppb.pesquisar}" update="frm" />
 			</p:toolbarGroup>
 
 			<p:toolbarGroup align="right">
 				<p:button value="Novo" style="margin-right:20px"
-					outcome="/medico/CadastroMedico.xhtml" />
+					outcome="/paciente/CadastroPaciente.xhtml" />
 			</p:toolbarGroup>
 		</p:toolbar>
 
 		<p:panel id="panel" style="margin-bottom:10px">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="nome" value="Nome" />
-				<p:inputText id="nome" label="Nome" value="#{pmb.medFilter.nome}"
+				<p:inputText id="nome" label="Nome" value="#{ppb.pacFilter.nome}"
 					size="40" />
 
-				<p:outputLabel for="crm" value="CRM" />
-				<p:inputText id="crm" label="crm" value="#{pmb.medFilter.crm}" />
-				
-				<p:outputLabel for="espec" value="Especialidade" />
-				<p:inputText id="espec" label="especialidade" value="#{pmb.medFilter.especialidade}" />
+				<p:outputLabel for="cpf" value="CPF" />
+				<p:inputText id="cpf" label="cpf" value="#{ppb.pacFilter.cpf}" />
 			</h:panelGrid>
 		</p:panel>
 
-		<p:panel header="Médicos cadastrados">
-			<p:dataTable id="medicosTable" value="#{pmb.medicos}" var="medico"
-				style="marging-top: 20px" emptyMessage="Nenhum médico encontrado"
+		<p:panel header="Pacientes cadastrados">
+			<p:dataTable id="pacientesTable" value="#{ppb.pacientes}" var="paciente"
+				style="marging-top: 20px" emptyMessage="Nenhum paciente encontrado"
 				rows="20" paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom">
 
-				<p:column headerText="CRM" style="text-align: center; width: 180px">
-					<h:outputText value="#{medico.crm}" />
+				<p:column headerText="CPF" style="text-align: center; width: 180px">
+					<h:outputText value="#{paciente.cpf}" />
 				</p:column>
 
 				<p:column headerText="Nome">
-					<h:outputText value="#{medico.nome}" />
+					<h:outputText value="#{paciente.nome}" />
 				</p:column>				
 			</p:dataTable>
 		</p:panel>
 	</h:form>
+
 </h:body>
 
 </html>

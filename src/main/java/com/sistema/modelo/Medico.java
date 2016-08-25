@@ -3,6 +3,7 @@ package com.sistema.modelo;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,36 +28,47 @@ public class Medico {
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
 	
 	@NotEmpty
+	@Column(length=60, nullable=false)
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
 	@NotEmpty
+	@Column(length=15, nullable=false, unique=true)
 	public String getCrm() {
 		return crm;
 	}
+	
 	public void setCrm(String crm) {
 		this.crm = crm;
 	}
 		
 	@NotEmpty
+	@Column(length=15, nullable=false)
 	public String getTelefone1() {
 		return telefone1;
 	}
+	
 	public void setTelefone1(String telefone1) {
 		this.telefone1 = telefone1;
 	}
+	
+	@Column(length=15)
 	public String getTelefone2() {
 		return telefone2;
 	}
+	
+	@Column(length=15)
 	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
 	}
@@ -66,6 +78,7 @@ public class Medico {
 	public Endereco getEndereco() {
 		return endereco;
 	}
+	
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}		
@@ -74,6 +87,7 @@ public class Medico {
 	public List<Especialidade> getEspecialidade() {
 		return especialidades;
 	}
+	
 	public void setEspecialidade(List<Especialidade> especialidade) {
 		this.especialidades = especialidade;
 	}
@@ -85,6 +99,7 @@ public class Medico {
 		result = prime * result + id;
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
