@@ -7,7 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.sistema.modelo.Medico;
+import com.sistema.model.Medico;
 import com.sistema.repository.Medicos;
 import com.sistema.repository.filter.MedicoFilter;
 

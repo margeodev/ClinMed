@@ -5,7 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.sistema.modelo.Especialidade;
+import com.sistema.model.Especialidade;
 import com.sistema.repository.Especialidades;
 import com.sistema.util.cdi.CDIServiceLocator;
 

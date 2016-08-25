@@ -3,7 +3,8 @@ package com.sistema.service;
 import java.io.Serializable;
 
 import javax.inject.Inject;
-import com.sistema.modelo.Paciente;
+
+import com.sistema.model.Paciente;
 import com.sistema.repository.Pacientes;
 import com.sistema.util.jpa.Transactional;
 

@@ -7,7 +7,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.sistema.modelo.Paciente;
+import com.sistema.model.Paciente;
 import com.sistema.repository.EnderecoPorCep;
 import com.sistema.service.NegocioException;
 import com.sistema.service.PacServ;

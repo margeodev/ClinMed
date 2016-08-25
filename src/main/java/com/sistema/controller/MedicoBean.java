@@ -9,9 +9,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.sistema.modelo.Endereco;
-import com.sistema.modelo.Especialidade;
-import com.sistema.modelo.Medico;
+import com.sistema.model.Endereco;
+import com.sistema.model.Especialidade;
+import com.sistema.model.Medico;
 import com.sistema.repository.EnderecoPorCep;
 import com.sistema.repository.Especialidades;
 import com.sistema.service.MedServ;

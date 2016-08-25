@@ -6,7 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.sistema.modelo.Especialidade;
+import com.sistema.model.Especialidade;
 
 public class Especialidades implements Serializable {
 

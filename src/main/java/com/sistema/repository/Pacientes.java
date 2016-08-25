@@ -14,7 +14,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import com.sistema.modelo.Paciente;
+import com.sistema.model.Paciente;
 import com.sistema.repository.filter.PacienteFilter;
 
 public class Pacientes implements Serializable {

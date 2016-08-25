@@ -1,76 +1,92 @@
-package com.sistema.modelo;
+package com.sistema.model;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
+import com.sistema.enums.Sexo;
 
 @Entity
-public class Medico {
+public class Paciente implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String nome;
-	private String crm;
+	private String cpf;
 	private String telefone1;
 	private String telefone2;
+	private Sexo sexo;
 	private Endereco endereco;
-	private List<Especialidade> especialidades;
+	private Date dataNascimento;
+	
+	public Paciente(){
+		endereco = new Endereco();
+	}
 	
 	@Id @GeneratedValue
 	public int getId() {
 		return id;
 	}
-	
 	public void setId(int id) {
 		this.id = id;
 	}
 	
-	@NotEmpty
+	@NotBlank
 	@Column(length=60, nullable=false)
 	public String getNome() {
 		return nome;
 	}
-	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
-	@NotEmpty
+	@NotBlank
 	@Column(length=15, nullable=false, unique=true)
-	public String getCrm() {
-		return crm;
-	}
-	
-	public void setCrm(String crm) {
-		this.crm = crm;
+	public String getCpf() {
+		return cpf;
 	}
 		
-	@NotEmpty
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
+	@NotBlank
 	@Column(length=15, nullable=false)
 	public String getTelefone1() {
 		return telefone1;
 	}
-	
 	public void setTelefone1(String telefone1) {
 		this.telefone1 = telefone1;
 	}
 	
-	@Column(length=15)
+	@Column(length=15)	
 	public String getTelefone2() {
 		return telefone2;
 	}
-	
-	@Column(length=15)
 	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
+	}
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	public Sexo getSexo() {
+		return sexo;
+	}
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
 	}
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -81,17 +97,18 @@ public class Medico {
 	
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}		
-	
-	@ManyToMany
-	public List<Especialidade> getEspecialidade() {
-		return especialidades;
 	}
-	
-	public void setEspecialidade(List<Especialidade> especialidade) {
-		this.especialidades = especialidade;
+
+	@NotNull
+	@Column(name="data_nascimento")
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
-	
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,7 +116,7 @@ public class Medico {
 		result = prime * result + id;
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -108,7 +125,7 @@ public class Medico {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Medico other = (Medico) obj;
+		Paciente other = (Paciente) obj;
 		if (id != other.id)
 			return false;
 		return true;

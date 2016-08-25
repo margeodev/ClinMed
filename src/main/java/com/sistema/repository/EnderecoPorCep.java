@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.sistema.modelo.Endereco;
+import com.sistema.model.Endereco;
 
 public class EnderecoPorCep implements Serializable{
 	

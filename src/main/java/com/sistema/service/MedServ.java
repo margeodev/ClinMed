@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import com.sistema.modelo.Medico;
+import com.sistema.model.Medico;
 import com.sistema.repository.Medicos;
 import com.sistema.util.jpa.Transactional;
 
