@@ -7,8 +7,6 @@ body {
 	font-weight: normal;
 }
 
-
-
 p {
 	margin: 20px !important;
 	color: #096495;
@@ -16,4 +14,18 @@ p {
 	font-weight: bold;
 	padding: 0px;
 	margin: 0px
+}
+
+.column1 {
+	width: 50%;
+	height: auto;
+}
+
+.column2 {
+	width: 50%;
+	height: auto
+}
+
+.selectItems label {
+   margin: 2px;
 }

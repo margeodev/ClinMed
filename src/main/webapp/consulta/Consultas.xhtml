@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Lista de Consultas</title>
+	<h:outputScript library="js" name="general.js" />
+	<h:outputStylesheet name="sistema.css" library="css" />
+</h:head>
+
+<h:body>
+	<p:messages autoUpdate="true" closable="true" id="msgs" />
+	<p>Consultas</p>
+	<p:panel id="panel" header="Consultas agendadas">
+		<p:dataTable id="consultasTable" value="#{consultaBean.consultas}"
+			var="consulta" rows="20" paginator="true"
+			paginatorAlwaysVisible="false" paginatorPosition="bottom"
+			emptyMessage="Nenhuma consulta agendada">
+
+			<p:column headerText="Códico" style="text-align: center; width: 70px">
+				<h:outputText value="#{consulta.id}" />
+			</p:column>
+
+			<p:column headerText="Paciente">
+				<h:outputText value="#{consulta.paciente.nome}" />
+			</p:column>
+			
+			<p:column headerText="Médico">
+				<h:outputText value="#{consulta.medico.nome}" />
+			</p:column>
+			
+			<p:column headerText="Data" style="width:220px; text-align: center">
+				<h:outputText value="#{consulta.data}" />
+			</p:column>
+
+		</p:dataTable>
+	</p:panel>
+
+
+</h:body>
+
+</html>

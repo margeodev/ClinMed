@@ -3,11 +3,13 @@ package com.sistema.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+@Entity
 public class Consulta implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -36,6 +38,7 @@ public class Consulta implements Serializable{
 	}
 	
 	@NotNull
+	@ManyToOne
 	public Paciente getPaciente() {
 		return paciente;
 	}

@@ -42,12 +42,16 @@
 				style="marging-top: 20px" emptyMessage="Nenhum paciente encontrado"
 				rows="20" paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom">
+				
+				<p:column headerText="Código" style="text-align: center; width: 90px" sortBy="#{paciente.id}">
+					<h:outputText value="#{paciente.id}"/>
+				</p:column>
 
 				<p:column headerText="CPF" style="text-align: center; width: 180px">
 					<h:outputText value="#{paciente.cpf}" />
 				</p:column>
 
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" sortBy="#{paciente.nome}">
 					<h:outputText value="#{paciente.nome}" />
 				</p:column>				
 			</p:dataTable>

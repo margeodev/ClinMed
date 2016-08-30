@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Nova Consulta</title>
+	<h:outputScript library="js" name="general.js" />
+	<h:outputStylesheet name="sistema.css" library="css" />
+</h:head>
+
+<h:body>
+	<p:messages autoUpdate="true" closable="true" id="msgs" />
+	<p>Nova Consulta</p>
+	<p:panel id="panel" header="Agendamento">
+		<p:panelGrid columnClasses="column1, column2" columns="2"
+			style="with: 100%" id="main">
+			<h:panelGroup>
+				<h:form id="frm">
+					<p:outputLabel value="Buscar Paciente" for="paciente"
+						style="margin: 15px" styleClass="label" />
+					<p:inputText id="paciente"
+						value="#{consultaBean.pacienteFilter.nome}" style="margin: 5px">
+						<p:ajax listener="#{consultaBean.buscar}" event="keyup"
+							update="tablePacientes" process="@this" partialSubmit="true" />
+					</p:inputText>
+
+					<p:dataTable id="tablePacientes" value="#{consultaBean.pacientes}"
+						var="paciente" selectionMode="single" style="margin:10px;"
+						selection="#{consultaBean.paciente}" rowKey="#{paciente.id}"
+						emptyMessage="Nenhum paciente encontrado" rows="7"
+						paginator="true" paginatorPosition="bottom">
+
+						<p:ajax event="rowSelect" listener="#{consultaBean.onRowSelect}"
+							update=":consultaFrm:paciente" />
+
+						<p:column headerText="Código"
+							style="width: 60px; text-align: center">
+							<h:outputText value="#{paciente.id}" />
+						</p:column>
+						<p:column headerText="CPF" style="width: 130px">
+							<h:outputText value="#{paciente.cpf}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{paciente.nome}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<h:form id="consultaFrm">
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Médico" />
+						<h:panelGroup>
+							<p:autoComplete id="medico" forceSelection="true"
+								converter="medConverter"
+								completeMethod="#{consultaBean.escolherMedico}"
+								value="#{consultaBean.consulta.medico}" var="m"
+								itemLabel="#{m.nome}" itemValue="#{m}" size="40" />
+							<p:watermark for="medico" value="Digite o nome" />
+						</h:panelGroup>
+
+						<p:outputLabel value="Paciente" />
+						<p:inputText value="#{consultaBean.paciente.nome}" readonly="true"
+							id="paciente" size="40"/>
+
+						<p:outputLabel value="Data" for="data" />
+						<p:calendar id="data" value="#{consultaBean.consulta.data}"
+							pattern="dd/MM/yyyy" readonlyInput="true" locale="pt_BR" />
+
+						<p:spacer />
+						<p:inputTextarea rows="8" cols="40" counter="display"
+							maxlength="368" counterTemplate="{0} caracteres restantes"
+							id="descricao" value="#{consultaBean.consulta.informacoes}" />
+						<p:watermark for="descricao"
+							value="Informe detalhes relevantes da consulta" />
+
+						<h:outputText value="" id="display" />
+					</h:panelGrid>
+
+					<p:commandButton value="Registrar Consulta"
+						action="#{consultaBean.registrar}" style="margin-top: 15px"  update="main"/>
+				</h:form>
+			</h:panelGroup>
+		</p:panelGrid>
+	</p:panel>
+
+
+</h:body>
+
+</html>

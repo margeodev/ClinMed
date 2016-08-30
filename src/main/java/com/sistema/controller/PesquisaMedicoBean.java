@@ -3,6 +3,7 @@ package com.sistema.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,12 +22,13 @@ public class PesquisaMedicoBean implements Serializable {
 	private Medicos medicosRep;
 	
 	private List<Medico> medicos;
-	private MedicoFilter medFilter;
-		
-	public PesquisaMedicoBean(){		
-		medFilter = new MedicoFilter();
+	private MedicoFilter medFilter = new MedicoFilter();
+
+	@PostConstruct
+	public void init(){
+		medicos = medicosRep.todos();
 	}
-	
+		
 	public void pesquisar(){		
 		medicos = medicosRep.filtrar(medFilter);
 		System.out.println("Total de médicos: " + medicos.size());

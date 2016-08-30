@@ -92,7 +92,7 @@
 			<p:tab title="Especialidades">
 				<p:panel>
 					<p:selectManyCheckbox value="#{mb.medico.especialidade}" converter="espCat" 
-						columns="4" layout="responsive">
+						columns="4" layout="responsive" styleClass="selectItems">
 						<f:selectItems value="#{mb.especialidades}" var="esp" itemLabel="#{esp.descricao}"
 							itemValue="#{esp}"/>
 					</p:selectManyCheckbox>

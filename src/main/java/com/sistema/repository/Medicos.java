@@ -13,7 +13,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-
 import com.sistema.model.Medico;
 import com.sistema.repository.filter.MedicoFilter;
 
@@ -53,6 +52,14 @@ public class Medicos implements Serializable {
 			criteria.add(Restrictions.ilike("e.descricao", filtro.getEspecialidade(), MatchMode.ANYWHERE));
 		}
 		return criteria.addOrder(Order.asc("nome")).list();
+	}
+
+	public List<Medico> todos() {
+		return em.createQuery("from Medico", Medico.class).getResultList();
+	}
+
+	public Medico porId(int id) {
+		return em.find(Medico.class, id);
 	}
 	
 }

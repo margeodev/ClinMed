@@ -24,7 +24,7 @@ public class Medico {
 	private Endereco endereco;
 	private List<Especialidade> especialidades;
 	
-	@Id @GeneratedValue
+	@Id	@GeneratedValue
 	public int getId() {
 		return id;
 	}

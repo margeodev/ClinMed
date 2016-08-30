@@ -16,8 +16,14 @@ public class ConsultaServ implements Serializable{
 	private Consultas consultaRep;
 	
 	@Transactional
-	public void salvar(Consulta consulta){
-		consultaRep.guardar(consulta);
+	public void salvar(Consulta consulta) throws NegocioException{
+		if (consulta.getMedico() != null && consulta.getData() != null &&
+			consulta.getInformacoes() != null && consulta.getPaciente() !=null) {
+			consultaRep.guardar(consulta);
+		} else {
+			throw new NegocioException("Preencha todos os campos");
+		}
+		
 	}
 	
 }

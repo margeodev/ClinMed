@@ -1,10 +1,9 @@
 package com.sistema.repository;
 
 import java.io.Serializable;
-
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-
 import com.sistema.model.Consulta;
 
 public class Consultas implements Serializable {
@@ -16,6 +15,10 @@ public class Consultas implements Serializable {
 	
 	public void guardar(Consulta consulta){
 		em.merge(consulta);
+	}
+	
+	public List<Consulta> todas() {
+		return em.createQuery("from Consulta", Consulta.class).getResultList();
 	}
 
 }

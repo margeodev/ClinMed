@@ -22,6 +22,5 @@ public class Especialidades implements Serializable {
 	public Especialidade porId(int id) {
 		return em.find(Especialidade.class, id);
 	}
-
 	
 }

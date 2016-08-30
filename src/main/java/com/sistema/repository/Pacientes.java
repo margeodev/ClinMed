@@ -1,6 +1,7 @@
 package com.sistema.repository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,6 +38,21 @@ public class Pacientes implements Serializable {
 		}		
 	}
 
+	public Paciente porId(int id) {
+		return em.find(Paciente.class, id);
+	}
+	
+	public List<Paciente> todos() {
+		return em.createQuery("from Paciente", Paciente.class).getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Paciente> ultimos(){
+		Session session = em.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(Paciente.class);
+		return criteria.addOrder(Order.desc("id")).setMaxResults(10).list();		
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Paciente> filtrar(PacienteFilter pacFilter) {
 		Session session = em.unwrap(Session.class);

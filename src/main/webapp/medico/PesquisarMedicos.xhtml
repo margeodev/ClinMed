@@ -21,7 +21,7 @@
 			</p:toolbarGroup>
 
 			<p:toolbarGroup align="right">
-				<p:button value="Novo" style="margin-right:20px"
+				<p:button value="Novo Médico" style="margin-right:20px"
 					outcome="/medico/CadastroMedico.xhtml" />
 			</p:toolbarGroup>
 		</p:toolbar>
@@ -50,7 +50,7 @@
 					<h:outputText value="#{medico.crm}" />
 				</p:column>
 
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" sortBy="#{medico.nome}">
 					<h:outputText value="#{medico.nome}" />
 				</p:column>				
 			</p:dataTable>

@@ -23,9 +23,12 @@ import com.sistema.util.jsf.FacesUtil;
 public class MedicoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Medico medico;
+	
 	@Inject
 	private MedServ medServ;
+	
+	private Medico medico;
+	
 	@Inject
 	private EnderecoPorCep endCep;
 	private List<Especialidade> especialidades = new ArrayList<Especialidade>();
